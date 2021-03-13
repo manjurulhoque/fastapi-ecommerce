@@ -7,8 +7,8 @@ from starlette.middleware.cors import CORSMiddleware
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(os.path.join(os.path.abspath(os.path.join(BASE_DIR, os.pardir)), ".env"))
 
+from api import user_api
 from .database import engine
-from . import models
 
 # models.Base.metadata.create_all(bind=engine)
 
@@ -35,3 +35,5 @@ app.add_middleware(
     allow_headers=["*"],
     allow_credentials=True,
 )
+
+app.include_router(user_api.router, tags=['users'])
