@@ -1,0 +1,7 @@
+to downgrade:
+    alembic downgrade -1 // latest revision
+
+    Note for SQLITE:
+        // update downgrade method of that revision
+        with op.batch_alter_table("users", schema=None) as batch_op:
+            batch_op.drop_column("username")
