@@ -7,7 +7,7 @@ from starlette.middleware.cors import CORSMiddleware
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(os.path.join(os.path.abspath(os.path.join(BASE_DIR, os.pardir)), ".env"))
 
-from api import user_api
+from api import user_api, product_api
 from .database import engine
 
 # models.Base.metadata.create_all(bind=engine)
@@ -26,6 +26,7 @@ app = FastAPI(
     redocs_url=None,
     docs_url="/",
     openapi_tags=tags_metadata,
+    debug=True
 )
 
 app.add_middleware(
@@ -37,3 +38,4 @@ app.add_middleware(
 )
 
 app.include_router(user_api.router, tags=['users'])
+app.include_router(product_api.router, prefix='/products', tags=['products'])

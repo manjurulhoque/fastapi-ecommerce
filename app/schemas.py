@@ -43,3 +43,12 @@ class UserCreate(UserBase):
 class Token(BaseModel):
     access_token: str
     token_type: str
+
+
+class ProductCreate(BaseModel):
+    title: str
+    quantity: int
+    description: str
+
+    class Config:
+        orm_mode = True
