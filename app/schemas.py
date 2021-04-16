@@ -5,6 +5,15 @@ from pydantic import BaseModel, EmailStr, Field
 UserPost = ForwardRef('Post')
 
 
+class CustomHTTPError(BaseModel):
+    detail: str
+
+    class Config:
+        schema_extra = {
+            "example": {"detail": "HTTPException raised."},
+        }
+
+
 class UserBase(BaseModel):
     email: EmailStr = Field(None, example="user@example.com", title="User email")
 
@@ -49,6 +58,17 @@ class ProductCreate(BaseModel):
     title: str
     quantity: int
     description: str
+
+    class Config:
+        orm_mode = True
+
+
+class ProductList(BaseModel):
+    title: str
+    quantity: int
+    description: str
+    image: str
+    owner: UserGet
 
     class Config:
         orm_mode = True
