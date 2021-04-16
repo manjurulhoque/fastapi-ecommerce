@@ -29,5 +29,16 @@ class Product(Base):
     quantity = Column(Integer)
     description = Column(String)
     owner_id = Column(Integer, ForeignKey("users.id"))
+    category_id = Column(Integer, ForeignKey("categories.id"))
 
     owner = relationship("User", back_populates="products")
+    category = relationship("Category", back_populates="products")
+
+
+class Category(Base):
+    __tablename__ = "categories"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    name = Column(String, index=True)
+
+    products = relationship("Product", back_populates="category")

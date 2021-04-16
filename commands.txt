@@ -5,3 +5,6 @@ to downgrade:
         // update downgrade method of that revision
         with op.batch_alter_table("users", schema=None) as batch_op:
             batch_op.drop_column("username")
+
+to make migrations:
+    alembic revision --autogenerate -m "Create category model"

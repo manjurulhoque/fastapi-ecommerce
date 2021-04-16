@@ -72,3 +72,10 @@ class ProductList(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class CategoryList(BaseModel):
+    name: str
+
+    class Config:
+        orm_mode = True
