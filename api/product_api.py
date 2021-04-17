@@ -37,7 +37,7 @@ def list_products(db: Session = Depends(get_db)):
         "description": "Custom error",
     },
 })
-def create_product(file: UploadFile = File(...), title: str = Body(...), description: str = Body(...), quantity: int = Body(..., gt=0), db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
+def create_product(file: UploadFile = File(...), title: str = Body(...), description: str = Body(...), quantity: int = Body(..., gt=0), category_id: int = Body(..., gt=0), db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
     filename = media_path + file.filename
     if "image/" not in file.content_type:
         raise HTTPException(403, detail='Only image is acceptable')
@@ -45,5 +45,5 @@ def create_product(file: UploadFile = File(...), title: str = Body(...), descrip
     with open(filename, "wb") as image:
         shutil.copyfileobj(file.file, image)
 
-    product = schemas.ProductCreate(title=title, description=description, quantity=quantity)
+    product = schemas.ProductCreate(title=title, description=description, quantity=quantity, category_id=category_id)
     return crud.create_product(db=db, product=product, image=filename, owner_id=current_user.id)

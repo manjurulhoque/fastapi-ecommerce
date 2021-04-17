@@ -14,6 +14,7 @@ def create_product(db: Session, product: schemas.ProductCreate, image: str, owne
         quantity=product.quantity,
         image=image,
         owner_id=owner_id,
+        category_id=product.category_id,
     )
 
     db.add(new_product)

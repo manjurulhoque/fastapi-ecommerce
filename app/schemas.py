@@ -54,35 +54,38 @@ class Token(BaseModel):
     token_type: str
 
 
+class BaseCategory(BaseModel):
+    name: str
+
+
+class CategoryCreate(BaseCategory):
+    class Config:
+        orm_mode = True
+
+
+class CategoryList(BaseCategory):
+    class Config:
+        orm_mode = True
+
+
 class ProductCreate(BaseModel):
     title: str
     quantity: int
     description: str
+    category_id: int
 
     class Config:
         orm_mode = True
 
 
 class ProductList(BaseModel):
+    id: int
     title: str
     quantity: int
     description: str
     image: str
     owner: UserGet
-
-    class Config:
-        orm_mode = True
-
-
-class CategoryCreate(BaseModel):
-    name: str
-
-    class Config:
-        orm_mode = True
-
-
-class CategoryList(BaseModel):
-    name: str
+    category: CategoryList
 
     class Config:
         orm_mode = True
