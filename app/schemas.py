@@ -74,6 +74,13 @@ class ProductList(BaseModel):
         orm_mode = True
 
 
+class CategoryCreate(BaseModel):
+    name: str
+
+    class Config:
+        orm_mode = True
+
+
 class CategoryList(BaseModel):
     name: str
 
