@@ -15,6 +15,7 @@ class User(Base):
     role = Column(String(6), nullable=True, default="user")
 
     products = relationship("Product", back_populates="owner")
+    carts = relationship("Cart", back_populates="owner")
 
     def __repr__(self):
         return f"<User(name='{self.name}', email='{self.email}')>"
@@ -42,3 +43,16 @@ class Category(Base):
     name = Column(String, index=True)
 
     products = relationship("Product", back_populates="category")
+
+
+class Cart(Base):
+    __tablename__ = "carts"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    owner_id = Column(Integer, ForeignKey("users.id"))
+    product_id = Column(Integer, ForeignKey("products.id"))
+    quantity = Column(Integer)
+
+    owner = relationship("User", back_populates="carts")
+    products = relationship("Product")
+
