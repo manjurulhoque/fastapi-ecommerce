@@ -55,7 +55,7 @@ class Token(BaseModel):
 
 
 class BaseCategory(BaseModel):
-    name: str
+    name: str = Field(example="e.g. Programming")
 
 
 class CategoryCreate(BaseCategory):
@@ -64,12 +64,14 @@ class CategoryCreate(BaseCategory):
 
 
 class CategoryList(BaseCategory):
+    id: int
+
     class Config:
         orm_mode = True
 
 
 class ProductCreate(BaseModel):
-    title: str
+    title: str = Field(example="Example title")
     quantity: int
     description: str
     category_id: int
@@ -80,7 +82,7 @@ class ProductCreate(BaseModel):
 
 class ProductList(BaseModel):
     id: int
-    title: str
+    title: str = Field(example="Example title")
     quantity: int
     description: str
     image: str

@@ -16,6 +16,6 @@ def list_categories(db: Session = Depends(get_db)):
 
 
 @router.post("/create", response_model=CategoryCreate)
-def create_category(name: str = Body(...), db: Session = Depends(get_db)):
+def create_category(name: str = Body(..., example="e.g. Programming"), db: Session = Depends(get_db)):
     category = CategoryCreate(name=name)
     return crud.create_category(db, category)

@@ -8,7 +8,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(os.path.join(os.path.abspath(os.path.join(BASE_DIR, os.pardir)), ".env"))
 
 from api import user_api, product_api, category_api
-from .database import engine
 
 # models.Base.metadata.create_all(bind=engine)
 
