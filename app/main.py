@@ -20,7 +20,7 @@ tags_metadata = [
 
 app = FastAPI(
     title="E-commerce API",
-    description="FastAPI based e-commerce",
+    description="FastAPI based ***e-commerce***",
     version="0.1.0",
     redocs_url=None,
     docs_url="/",
