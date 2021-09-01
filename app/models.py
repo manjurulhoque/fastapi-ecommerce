@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 from sqlalchemy_utils import URLType
 
 from .database import Base
@@ -15,7 +15,6 @@ class User(Base):
     role = Column(String(6), nullable=True, default="user")
 
     products = relationship("Product", back_populates="owner")
-    carts = relationship("Cart", back_populates="owner")
 
     def __repr__(self):
         return f"<User(name='{self.name}', email='{self.email}')>"
@@ -49,10 +48,10 @@ class Cart(Base):
     __tablename__ = "carts"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    quantity = Column(Integer)
     owner_id = Column(Integer, ForeignKey("users.id"))
     product_id = Column(Integer, ForeignKey("products.id"))
-    quantity = Column(Integer)
 
-    owner = relationship("User", back_populates="carts")
+    owner = relationship("User", backref=backref("cart", uselist=False))
     products = relationship("Product")
 

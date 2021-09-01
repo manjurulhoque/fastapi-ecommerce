@@ -8,3 +8,6 @@ to downgrade:
 
 to make migrations:
     alembic revision --autogenerate -m "Create category model"
+
+to migrate:
+    alembic upgrade head

@@ -1,8 +1,8 @@
-"""Create all models
+"""Create all model
 
-Revision ID: ffa5d0c2f7e0
+Revision ID: 8ec670c456f0
 Revises: 
-Create Date: 2021-04-22 21:29:39.240208
+Create Date: 2021-09-01 23:39:02.845189
 
 """
 import sqlalchemy_utils
@@ -11,7 +11,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ffa5d0c2f7e0'
+revision = '8ec670c456f0'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -53,9 +53,9 @@ def upgrade():
     op.create_index(op.f('ix_products_title'), 'products', ['title'], unique=False)
     op.create_table('carts',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('quantity', sa.Integer(), nullable=True),
     sa.Column('owner_id', sa.Integer(), nullable=True),
     sa.Column('product_id', sa.Integer(), nullable=True),
-    sa.Column('quantity', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.PrimaryKeyConstraint('id')
